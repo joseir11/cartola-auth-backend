@@ -13,7 +13,6 @@
       min-height: 100vh;
     }
 
-    /* HEADER */
     header {
       background: #1a6b3c;
       color: white;
@@ -23,16 +22,7 @@
       justify-content: space-between;
     }
 
-    .header-logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .header-logo img {
-      height: 36px;
-      width: auto;
-    }
+    .header-logo img { height: 36px; width: auto; }
 
     .header-user {
       display: flex;
@@ -58,7 +48,6 @@
       font-size: 12px;
     }
 
-    /* NAV */
     nav {
       background: #fff;
       display: flex;
@@ -82,14 +71,12 @@
       border-bottom-color: #1a6b3c;
     }
 
-    /* MAIN */
     main {
       padding: 16px;
       max-width: 800px;
       margin: 0 auto;
     }
 
-    /* CARDS RESUMO */
     .cards-resumo {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -117,7 +104,6 @@
       margin-top: 2px;
     }
 
-    /* SEÇÃO */
     .secao {
       background: #fff;
       border-radius: 12px;
@@ -135,7 +121,6 @@
       border-bottom: 1px solid #eee;
     }
 
-    /* TIME */
     .campo {
       background: #1a6b3c;
       border-radius: 10px;
@@ -143,12 +128,74 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
+      position: relative;
+      border: 3px solid #145a32;
+      overflow: hidden;
+    }
+
+    .campo::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border: 6px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      pointer-events: none;
+    }
+
+    .linha-campo {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      height: 2px;
+      background: rgba(255,255,255,0.25);
+      pointer-events: none;
+    }
+
+    .meio-campo {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .circulo-central {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.25);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .area {
+      position: absolute;
+      width: 45%;
+      height: 18%;
+      border: 2px solid rgba(255,255,255,0.25);
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .area-baixo {
+      bottom: 6px;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .area-cima {
+      top: 6px;
+      border-top: none;
+      border-radius: 0 0 4px 4px;
     }
 
     .linha {
       display: flex;
       justify-content: center;
       gap: 8px;
+      position: relative;
+      z-index: 1;
     }
 
     .jogador {
@@ -157,6 +204,7 @@
       align-items: center;
       gap: 4px;
       cursor: pointer;
+      width: 60px;
     }
 
     .jogador-circulo {
@@ -168,14 +216,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      overflow: hidden;
+    }
+
+    .jogador-circulo img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
     }
 
     .jogador-nome {
       font-size: 10px;
       color: white;
       text-align: center;
-      max-width: 52px;
+      width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -187,7 +241,6 @@
       font-weight: 600;
     }
 
-    /* RODADA */
     .rodada-info {
       display: flex;
       justify-content: space-between;
@@ -231,9 +284,7 @@
       width: 38%;
     }
 
-    .time-partida.direita {
-      justify-content: flex-end;
-    }
+    .time-partida.direita { justify-content: flex-end; }
 
     .placar {
       font-weight: 700;
@@ -285,29 +336,52 @@
     <div class="secao">
       <h2>⚽ Meu Time — Rodada 1</h2>
       <div class="campo">
-        <div class="linha">
+
+        <div class="linha-campo meio-campo"></div>
+        <div class="circulo-central"></div>
+        <div class="area area-baixo"></div>
+        <div class="area area-cima"></div>
+
+        <!-- GOLEIRO + TÉCNICO -->
+        <div class="linha" style="position:relative; min-height:70px;">
+          <div class="jogador" style="position:absolute; left:8px;">
+            <div class="jogador-circulo">
+              <img src="tec.png" alt="Técnico" />
+            </div>
+            <div class="jogador-nome">Técnico</div>
+            <div class="jogador-pts">0 pts</div>
+          </div>
           <div class="jogador">
-            <div class="jogador-circulo">🧤</div>
+            <div class="jogador-circulo">
+              <img src="gol.png" alt="Goleiro" />
+            </div>
             <div class="jogador-nome">Goleiro</div>
             <div class="jogador-pts">0 pts</div>
           </div>
         </div>
+
+        <!-- DEFENSORES -->
         <div class="linha">
-          <div class="jogador"><div class="jogador-circulo">🛡️</div><div class="jogador-nome">Lateral</div><div class="jogador-pts">0 pts</div></div>
-          <div class="jogador"><div class="jogador-circulo">🛡️</div><div class="jogador-nome">Zagueiro</div><div class="jogador-pts">0 pts</div></div>
-          <div class="jogador"><div class="jogador-circulo">🛡️</div><div class="jogador-nome">Zagueiro</div><div class="jogador-pts">0 pts</div></div>
-          <div class="jogador"><div class="jogador-circulo">🛡️</div><div class="jogador-nome">Lateral</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" alt="Jogador" /></div><div class="jogador-nome">Lateral</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" alt="Jogador" /></div><div class="jogador-nome">Zagueiro</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" alt="Jogador" /></div><div class="jogador-nome">Zagueiro</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" alt="Jogador" /></div><div class="jogador-nome">Lateral</div><div class="jogador-pts">0 pts</div></div>
         </div>
+
+        <!-- MEIO-CAMPISTAS -->
         <div class="linha">
-          <div class="jogador"><div class="jogador-circulo">⚙️</div><div class="jogador-nome">Meia</div><div class="jogador-pts">0 pts</div></div>
-          <div class="jogador"><div class="jogador-circulo">⚙️</div><div class="jogador-nome">Meia</div><div class="jogador-pts">0 pts</div></div>
-          <div class="jogador"><div class="jogador-circulo">⚙️</div><div class="jogador-nome">Meia</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" alt="Jogador" /></div><div class="jogador-nome">Meia</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" alt="Jogador" /></div><div class="jogador-nome">Meia</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" alt="Jogador" /></div><div class="jogador-nome">Meia</div><div class="jogador-pts">0 pts</div></div>
         </div>
+
+        <!-- ATACANTES -->
         <div class="linha">
-          <div class="jogador"><div class="jogador-circulo">⚡</div><div class="jogador-nome">Atacante</div><div class="jogador-pts">0 pts</div></div>
-          <div class="jogador"><div class="jogador-circulo">⚡</div><div class="jogador-nome">Atacante</div><div class="jogador-pts">0 pts</div></div>
-          <div class="jogador"><div class="jogador-circulo">⚡</div><div class="jogador-nome">Atacante</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" alt="Jogador" /></div><div class="jogador-nome">Atacante</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" alt="Jogador" /></div><div class="jogador-nome">Atacante</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" alt="Jogador" /></div><div class="jogador-nome">Atacante</div><div class="jogador-pts">0 pts</div></div>
         </div>
+
       </div>
     </div>
 
