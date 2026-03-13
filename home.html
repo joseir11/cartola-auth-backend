@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JosaBet - Home</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      background: #1a6b3c;
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-logo img {
+      height: 36px;
+      width: auto;
+    }
+
+    .header-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .header-user img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    .btn-sair {
+      background: transparent;
+      border: 1px solid white;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    /* NAV */
+    nav {
+      background: #fff;
+      display: flex;
+      border-bottom: 2px solid #eee;
+      overflow-x: auto;
+    }
+
+    nav a {
+      padding: 12px 16px;
+      text-decoration: none;
+      color: #666;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+
+    nav a.active {
+      color: #1a6b3c;
+      border-bottom-color: #1a6b3c;
+    }
+
+    /* MAIN */
+    main {
+      padding: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* CARDS RESUMO */
+    .cards-resumo {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .card-resumo {
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+
+    .card-resumo .valor {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a6b3c;
+    }
+
+    .card-resumo .label {
+      font-size: 11px;
+      color: #999;
+      margin-top: 2px;
+    }
+
+    /* SEÇÃO */
+    .secao {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    }
+
+    .secao h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* TIME */
+    .campo {
+      background: #1a6b3c;
+      border-radius: 10px;
+      padding: 16px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .linha {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .jogador {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .jogador-circulo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .jogador-nome {
+      font-size: 10px;
+      color: white;
+      text-align: center;
+      max-width: 52px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .jogador-pts {
+      font-size: 10px;
+      color: #ffdd57;
+      font-weight: 600;
+    }
+
+    /* RODADA */
+    .rodada-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .rodada-badge {
+      background: #e8f5ee;
+      color: #1a6b3c;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-badge {
+      background: #fff3cd;
+      color: #856404;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .partida {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 13px;
+    }
+
+    .partida:last-child { border-bottom: none; }
+
+    .time-partida {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      width: 38%;
+    }
+
+    .time-partida.direita {
+      justify-content: flex-end;
+    }
+
+    .placar {
+      font-weight: 700;
+      font-size: 15px;
+      color: #1a1a1a;
+      text-align: center;
+      width: 24%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-logo">
+      <img src="CARTOLA.png" alt="JosaBet" />
+    </div>
+    <div class="header-user">
+      <img id="user-foto" src="https://via.placeholder.com/32" alt="Foto" />
+      <span id="user-nome">Usuário</span>
+      <button class="btn-sair" onclick="sair()">Sair</button>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#" class="active">Meu Time</a>
+    <a href="#">Mercado</a>
+    <a href="#">Parciais</a>
+    <a href="#">Rodada</a>
+    <a href="#">Liga</a>
+  </nav>
+
+  <main>
+
+    <div class="cards-resumo">
+      <div class="card-resumo">
+        <div class="valor" id="pontos-rodada">0.0</div>
+        <div class="label">Pontos na rodada</div>
+      </div>
+      <div class="card-resumo">
+        <div class="valor" id="patrimonio">C$ 100,00</div>
+        <div class="label">Patrimônio</div>
+      </div>
+      <div class="card-resumo">
+        <div class="valor" id="posicao-liga">#-</div>
+        <div class="label">Posição na liga</div>
+      </div>
+    </div>
+
+    <div class="secao">
+      <h2>⚽ Meu Time — Rodada 1</h2>
+      <div class="campo">
+        <div class="linha">
+          <div class="jogador">
+            <div class="jogador-circulo">🧤</div>
+            <div class="jogador-nome">Goleiro</div>
+            <div class="jogador-pts">0 pts</div>
+          </div>
+        </div>
+        <div class="linha">
+          <div class="jogador"><div class="jogador-circulo">🛡️</div><div class="jogador-nome">Lateral</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo">🛡️</div><div class="jogador-nome">Zagueiro</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo">🛡️</div><div class="jogador-nome">Zagueiro</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo">🛡️</div><div class="jogador-nome">Lateral</div><div class="jogador-pts">0 pts</div></div>
+        </div>
+        <div class="linha">
+          <div class="jogador"><div class="jogador-circulo">⚙️</div><div class="jogador-nome">Meia</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo">⚙️</div><div class="jogador-nome">Meia</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo">⚙️</div><div class="jogador-nome">Meia</div><div class="jogador-pts">0 pts</div></div>
+        </div>
+        <div class="linha">
+          <div class="jogador"><div class="jogador-circulo">⚡</div><div class="jogador-nome">Atacante</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo">⚡</div><div class="jogador-nome">Atacante</div><div class="jogador-pts">0 pts</div></div>
+          <div class="jogador"><div class="jogador-circulo">⚡</div><div class="jogador-nome">Atacante</div><div class="jogador-pts">0 pts</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="secao">
+      <div class="rodada-info">
+        <span class="rodada-badge">Rodada 1</span>
+        <span class="status-badge">Em breve</span>
+      </div>
+      <h2>📅 Jogos da Rodada</h2>
+      <div class="partida">
+        <div class="time-partida">🔴 Flamengo</div>
+        <div class="placar">0 x 0</div>
+        <div class="time-partida direita">Palmeiras 🟢</div>
+      </div>
+      <div class="partida">
+        <div class="time-partida">🔵 Cruzeiro</div>
+        <div class="placar">0 x 0</div>
+        <div class="time-partida direita">Corinthians ⚫</div>
+      </div>
+      <div class="partida">
+        <div class="time-partida">🔴 São Paulo</div>
+        <div class="placar">0 x 0</div>
+        <div class="time-partida direita">Grêmio 🔵</div>
+      </div>
+    </div>
+
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCoegwWC-xT7nXHQCwOCf2oM2IzYXODA8o",
+      authDomain: "josabet-db231.firebaseapp.com",
+      projectId: "josabet-db231",
+      storageBucket: "josabet-db231.firebasestorage.app",
+      messagingSenderId: "929085822183",
+      appId: "1:929085822183:web:9c5b7a27cf4b355eb5be42"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        document.getElementById('user-nome').textContent = user.displayName;
+        document.getElementById('user-foto').src = user.photoURL || 'https://via.placeholder.com/32';
+      } else {
+        window.location.href = 'index.html';
+      }
+    });
+
+    window.sair = async function() {
+      await signOut(auth);
+      window.location.href = 'index.html';
+    }
+  </script>
+
+</body>
+</html>
