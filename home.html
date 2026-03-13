@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JosaBet - Home</title>
   <style>
+    /* (mantenha todo o estilo que você já tem – igual ao anterior) */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #f0f2f5;
       min-height: 100vh;
     }
-
     header {
       background: #1a6b3c;
       color: white;
@@ -24,23 +23,19 @@
       top: 0;
       z-index: 100;
     }
-
     .header-logo img { height: 36px; width: auto; }
-
     .header-user {
       display: flex;
       align-items: center;
       gap: 8px;
       font-size: 14px;
     }
-
     .header-user img {
       width: 32px;
       height: 32px;
       border-radius: 50%;
       border: 2px solid white;
     }
-
     .btn-sair {
       background: transparent;
       border: 1px solid white;
@@ -50,7 +45,6 @@
       cursor: pointer;
       font-size: 12px;
     }
-
     nav {
       background: #fff;
       display: flex;
@@ -60,7 +54,6 @@
       top: 60px;
       z-index: 99;
     }
-
     nav a {
       padding: 12px 16px;
       text-decoration: none;
@@ -72,24 +65,19 @@
       margin-bottom: -2px;
       cursor: pointer;
     }
-
     nav a.active {
       color: #1a6b3c;
       border-bottom-color: #1a6b3c;
     }
-
     main { padding: 16px; max-width: 800px; margin: 0 auto; }
-
     .pagina { display: none; }
     .pagina.ativa { display: block; }
-
     .cards-resumo {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       margin-bottom: 16px;
     }
-
     .card-resumo {
       background: #fff;
       border-radius: 12px;
@@ -97,19 +85,16 @@
       text-align: center;
       box-shadow: 0 1px 6px rgba(0,0,0,0.06);
     }
-
     .card-resumo .valor {
       font-size: 20px;
       font-weight: 700;
       color: #1a6b3c;
     }
-
     .card-resumo .label {
       font-size: 11px;
       color: #999;
       margin-top: 2px;
     }
-
     .secao {
       background: #fff;
       border-radius: 12px;
@@ -117,7 +102,6 @@
       margin-bottom: 16px;
       box-shadow: 0 1px 6px rgba(0,0,0,0.06);
     }
-
     .secao h2 {
       font-size: 15px;
       font-weight: 600;
@@ -126,9 +110,7 @@
       padding-bottom: 8px;
       border-bottom: 1px solid #eee;
     }
-
     .campo-wrapper { display: flex; justify-content: center; }
-
     .campo {
       background: #2d8a4e;
       border: 4px solid #145a32;
@@ -143,7 +125,6 @@
       justify-content: space-between;
       padding: 10px 6px;
     }
-
     .campo::after {
       content: '';
       position: absolute;
@@ -158,21 +139,18 @@
       pointer-events: none;
       z-index: 0;
     }
-
     .marcacoes {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       pointer-events: none;
       z-index: 1;
     }
-
     .borda-interna {
       position: absolute;
       top: 6px; left: 6px; right: 6px; bottom: 6px;
       border: 2px solid rgba(255,255,255,0.55);
       border-radius: 3px;
     }
-
     .linha-meio {
       position: absolute;
       top: 50%; left: 6px; right: 6px;
@@ -180,7 +158,6 @@
       background: rgba(255,255,255,0.55);
       transform: translateY(-50%);
     }
-
     .circulo-centro {
       position: absolute;
       top: 50%; left: 50%;
@@ -189,7 +166,6 @@
       border: 2px solid rgba(255,255,255,0.55);
       transform: translate(-50%, -50%);
     }
-
     .ponto-centro {
       position: absolute;
       top: 50%; left: 50%;
@@ -198,7 +174,6 @@
       background: rgba(255,255,255,0.55);
       transform: translate(-50%, -50%);
     }
-
     .area-grande-baixo {
       position: absolute;
       bottom: 6px; left: 50%; transform: translateX(-50%);
@@ -206,7 +181,6 @@
       border: 2px solid rgba(255,255,255,0.55);
       border-bottom: none;
     }
-
     .area-grande-cima {
       position: absolute;
       top: 6px; left: 50%; transform: translateX(-50%);
@@ -214,7 +188,6 @@
       border: 2px solid rgba(255,255,255,0.55);
       border-top: none;
     }
-
     .area-pequena-baixo {
       position: absolute;
       bottom: 6px; left: 50%; transform: translateX(-50%);
@@ -222,7 +195,6 @@
       border: 2px solid rgba(255,255,255,0.55);
       border-bottom: none;
     }
-
     .area-pequena-cima {
       position: absolute;
       top: 6px; left: 50%; transform: translateX(-50%);
@@ -230,7 +202,6 @@
       border: 2px solid rgba(255,255,255,0.55);
       border-top: none;
     }
-
     .gol-baixo {
       position: absolute;
       bottom: 4px; left: 50%; transform: translateX(-50%);
@@ -239,7 +210,6 @@
       border-bottom: none;
       background: rgba(255,255,255,0.1);
     }
-
     .gol-cima {
       position: absolute;
       top: 4px; left: 50%; transform: translateX(-50%);
@@ -248,19 +218,16 @@
       border-top: none;
       background: rgba(255,255,255,0.1);
     }
-
     .canto {
       position: absolute;
       width: 10px; height: 10px;
       border-radius: 50%;
       border: 2px solid rgba(255,255,255,0.45);
     }
-
     .canto.tl { top: 4px; left: 4px; clip-path: inset(0 50% 50% 0); }
     .canto.tr { top: 4px; right: 4px; clip-path: inset(0 0 50% 50%); }
     .canto.bl { bottom: 4px; left: 4px; clip-path: inset(50% 50% 0 0); }
     .canto.br { bottom: 4px; right: 4px; clip-path: inset(50% 0 0 50%); }
-
     .linha {
       display: flex;
       justify-content: center;
@@ -268,7 +235,6 @@
       position: relative;
       z-index: 2;
     }
-
     .linha-tec-gol {
       display: flex;
       justify-content: center;
@@ -276,7 +242,6 @@
       position: relative;
       z-index: 2;
     }
-
     .jogador {
       display: flex;
       flex-direction: column;
@@ -285,7 +250,6 @@
       cursor: pointer;
       width: 52px;
     }
-
     .jogador-circulo {
       width: 40px; height: 40px;
       border-radius: 50%;
@@ -296,9 +260,7 @@
       justify-content: center;
       overflow: hidden;
     }
-
     .jogador-circulo img { width: 28px; height: 28px; object-fit: contain; }
-
     .jogador-nome {
       font-size: 9px;
       color: white;
@@ -309,23 +271,19 @@
       white-space: nowrap;
       text-shadow: 0 1px 2px rgba(0,0,0,0.5);
     }
-
     .jogador-pts {
       font-size: 9px;
       color: #ffdd57;
       font-weight: 700;
       text-shadow: 0 1px 2px rgba(0,0,0,0.5);
     }
-
     .tecnico { position: absolute; left: 4px; }
-
     .rodada-info {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
     }
-
     .rodada-badge {
       background: #e8f5ee;
       color: #1a6b3c;
@@ -334,7 +292,6 @@
       font-size: 12px;
       font-weight: 600;
     }
-
     .status-badge {
       background: #fff3cd;
       color: #856404;
@@ -343,9 +300,7 @@
       font-size: 12px;
       font-weight: 600;
     }
-
     .status-badge.ao-vivo { background: #ffe0e0; color: #c0392b; }
-
     .partida {
       display: flex;
       align-items: center;
@@ -354,9 +309,7 @@
       border-bottom: 1px solid #f0f0f0;
       font-size: 13px;
     }
-
     .partida:last-child { border-bottom: none; }
-
     .time-partida {
       display: flex;
       align-items: center;
@@ -364,9 +317,7 @@
       width: 38%;
       font-size: 12px;
     }
-
     .time-partida.direita { justify-content: flex-end; }
-
     .placar {
       font-weight: 700;
       font-size: 15px;
@@ -374,7 +325,6 @@
       text-align: center;
       width: 24%;
     }
-
     .busca-mercado {
       width: 100%;
       padding: 10px 14px;
@@ -384,14 +334,12 @@
       margin-bottom: 12px;
       outline: none;
     }
-
     .filtros {
       display: flex;
       gap: 6px;
       margin-bottom: 12px;
       flex-wrap: wrap;
     }
-
     .filtro-btn {
       padding: 5px 12px;
       border: 1px solid #ddd;
@@ -401,9 +349,7 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-
     .filtro-btn.ativo { background: #1a6b3c; color: white; border-color: #1a6b3c; }
-
     .jogador-mercado {
       display: flex;
       align-items: center;
@@ -412,10 +358,8 @@
       border-bottom: 1px solid #f0f0f0;
       cursor: pointer;
     }
-
     .jogador-mercado:last-child { border-bottom: none; }
     .jogador-mercado:hover { background: #f9f9f9; }
-
     .jogador-foto {
       width: 40px; height: 40px;
       border-radius: 50%;
@@ -423,30 +367,24 @@
       overflow: hidden;
       flex-shrink: 0;
     }
-
     .jogador-foto img { width: 100%; height: 100%; object-fit: cover; }
-
     .jogador-info { flex: 1; }
     .jogador-info .nome { font-size: 13px; font-weight: 600; color: #1a1a1a; }
     .jogador-info .clube { font-size: 11px; color: #999; }
     .jogador-preco { font-size: 13px; font-weight: 600; color: #1a6b3c; }
-
     .posicao-badge {
       font-size: 10px;
       padding: 2px 6px;
       border-radius: 4px;
       font-weight: 600;
     }
-
     .pos-gol { background: #fff3cd; color: #856404; }
     .pos-lat { background: #d4edda; color: #155724; }
     .pos-zag { background: #cce5ff; color: #004085; }
     .pos-mei { background: #f8d7da; color: #721c24; }
     .pos-ata { background: #e2d9f3; color: #4a235a; }
     .pos-tec { background: #d1ecf1; color: #0c5460; }
-
     .loading-msg { text-align: center; padding: 20px; color: #999; font-size: 14px; }
-
     .parcial-item {
       display: flex;
       align-items: center;
@@ -455,45 +393,13 @@
       border-bottom: 1px solid #f0f0f0;
       font-size: 13px;
     }
-
     .parcial-item:last-child { border-bottom: none; }
     .parcial-pts { font-weight: 700; font-size: 16px; color: #1a6b3c; }
     .parcial-pts.negativo { color: #c0392b; }
-
-    /* Novo estilo para o aviso de vinculação da Globo */
-    .aviso-globo {
-      background: #e7f3ff;
-      border-left: 4px solid #1a6b3c;
-      padding: 12px;
-      margin-bottom: 16px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .aviso-globo p {
-      font-size: 14px;
-      color: #1a1a1a;
-    }
-    .btn-conectar {
-      background: #1a6b3c;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 13px;
-    }
-    .btn-conectar:hover {
-      background: #145a32;
-    }
+    /* Nenhum aviso visual – tudo automático */
   </style>
 </head>
 <body>
-
   <header>
     <div class="header-logo">
       <img src="CARTOLA.png" alt="JosaBet" />
@@ -514,10 +420,6 @@
   </nav>
 
   <main>
-
-    <!-- Área para aviso de vinculação da Globo -->
-    <div id="aviso-globo-container" style="display: none;"></div>
-
     <!-- MEU TIME -->
     <div class="pagina ativa" id="pagina-meu-time">
       <div class="cards-resumo">
@@ -645,7 +547,7 @@
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
 
     const PROXY = 'https://josabet-proxy.onrender.com';
-    // ⚠️ Substitua 'SEU_CLIENT_ID_AQUI' pelo client_id obtido no desenvolvedores.globo.com
+    // 🔁 Substitua pelo seu client_id real da Globo (obtenha em developers.globo.com)
     const GLOBO_CLIENT_ID = 'SEU_CLIENT_ID_AQUI'; 
     const GLOBO_REDIRECT_URI = `${PROXY}/globo-callback`;
 
@@ -664,54 +566,44 @@
     let tokenAtual = '';
     let mercadoCompleto = [];
     let posicaoFiltro = 'todos';
+    let vinculoVerificado = false; // evita abrir popup múltiplas vezes
 
-    // ========== NOVAS FUNÇÕES PARA VÍNCULO COM GLOBO ==========
-    async function verificarVinculoGlobo() {
-      if (!tokenAtual) return;
+    // ========== FUNÇÃO QUE ABRE O POPUP DA GLOBO AUTOMATICAMENTE ==========
+    async function verificarEConectarGlobo() {
+      if (!tokenAtual || vinculoVerificado) return;
+      vinculoVerificado = true; // impede de tentar novamente no mesmo carregamento
+
       try {
         const res = await fetch(`${PROXY}/user/globo-status`, {
           headers: { 'Authorization': `Bearer ${tokenAtual}` }
         });
         const data = await res.json();
-        const container = document.getElementById('aviso-globo-container');
         if (!data.vinculado) {
-          container.style.display = 'block';
-          container.innerHTML = `
-            <div class="aviso-globo">
-              <p>🔗 Para ver os dados do Cartola, conecte sua conta Globo.</p>
-              <button class="btn-conectar" onclick="abrirLoginGlobo()">Conectar Conta Globo</button>
-            </div>
-          `;
-        } else {
-          container.style.display = 'none';
+          // Abre o popup automaticamente, sem perguntar
+          if (!GLOBO_CLIENT_ID || GLOBO_CLIENT_ID === 'SEU_CLIENT_ID_AQUI') {
+            console.warn('Client ID da Globo não configurado. Os dados do Cartola não aparecerão.');
+            return;
+          }
+          const url = `https://login.globo.com/api/authorization?client_id=${GLOBO_CLIENT_ID}&redirect_uri=${encodeURIComponent(GLOBO_REDIRECT_URI)}&response_type=code`;
+          window.open(url, 'loginGlobo', 'width=600,height=700');
         }
       } catch (e) {
         console.log('Erro ao verificar vínculo Globo:', e);
       }
     }
 
-    window.abrirLoginGlobo = function() {
-      if (!GLOBO_CLIENT_ID || GLOBO_CLIENT_ID === 'SEU_CLIENT_ID_AQUI') {
-        alert('Client ID da Globo não configurado. Obtenha seu client_id em developers.globo.com');
-        return;
-      }
-      const url = `https://login.globo.com/api/authorization?client_id=${GLOBO_CLIENT_ID}&redirect_uri=${encodeURIComponent(GLOBO_REDIRECT_URI)}&response_type=code`;
-      const popup = window.open(url, 'loginGlobo', 'width=600,height=700');
-    };
-
-    // Ouvinte para mensagens do proxy (quando o login Globo terminar)
+    // Quando o proxy terminar o login Globo, ele envia uma mensagem para esta janela
     window.addEventListener('message', function(event) {
       if (event.origin === PROXY) {
         if (event.data.success) {
-          // Esconde o aviso e recarrega os dados
-          document.getElementById('aviso-globo-container').style.display = 'none';
+          // Recarrega os dados do Cartola (agora com token válido)
           carregarDados();
         } else {
-          alert('Falha ao conectar conta Globo. Tente novamente.');
+          alert('Não foi possível conectar à Conta Globo. Tente novamente mais tarde.');
         }
       }
     });
-    // ===========================================================
+    // ========================================================================
 
     onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -719,7 +611,8 @@
         document.getElementById('user-foto').src = user.photoURL || 'https://via.placeholder.com/32';
         tokenAtual = await user.getIdToken();
         carregarDados();
-        verificarVinculoGlobo(); // <-- chama a verificação após carregar dados iniciais
+        // Chama a verificação automática após carregar os dados
+        verificarEConectarGlobo();
       } else {
         window.location.href = 'index.html';
       }
