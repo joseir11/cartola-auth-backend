@@ -197,11 +197,17 @@
         }));
         window.location.href = 'home.html';
       } catch (error) {
-        loading.style.display = 'none';
-        erro.style.display = 'block';
-        erro.textContent = 'Erro ao fazer login. Tente novamente.';
-        console.error(error);
-      }
+  loading.style.display = 'none';
+  erro.style.display = 'block';
+  
+  if (error.code === 'auth/account-exists-with-different-credential') {
+    erro.textContent = 'Este e-mail já está cadastrado com Google. Faça login com Google primeiro.';
+  } else {
+    erro.textContent = 'Erro ao fazer login: ' + error.message;
+  }
+  
+  console.error(error);
+}
     }
 
     window.loginGoogle = () => fazerLogin(googleProvider);
