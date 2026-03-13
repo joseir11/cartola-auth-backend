@@ -27,16 +27,10 @@
       margin-bottom: 32px;
     }
 
-    .logo-circle {
-      width: 72px;
+    .logo-area img {
       height: 72px;
-      background: #1a6b3c;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 12px;
-      font-size: 36px;
+      width: auto;
+      margin-bottom: 12px;
     }
 
     .app-name {
@@ -86,11 +80,7 @@
     .btn:hover { background: #f5f5f5; }
     .btn:last-child { margin-bottom: 0; }
 
-    .btn-icon {
-      width: 24px;
-      height: 24px;
-      flex-shrink: 0;
-    }
+    .btn-icon { width: 24px; height: 24px; flex-shrink: 0; }
 
     .terms {
       font-size: 12px;
@@ -99,9 +89,25 @@
       line-height: 1.6;
     }
 
-    .terms a {
-      color: #1a6b3c;
-      text-decoration: none;
+    .terms a { color: #1a6b3c; text-decoration: none; }
+
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 16px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .erro {
+      display: none;
+      background: #fff3cd;
+      color: #856404;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      text-align: center;
     }
   </style>
 </head>
@@ -110,13 +116,15 @@
   <div class="container">
 
     <div class="logo-area">
-      <img src="CARTOLA.png" alt="JosaBet" style="height: 72px; width: auto;" />
+      <img src="CARTOLA.png" alt="JosaBet" />
       <h1 class="app-name">JosaBet</h1>
-      <p class="app-slogan">LIGA CARTOLA BMP</p>
+      <p class="app-slogan">Monte seu time e dispute com amigos</p>
     </div>
 
     <div class="card">
       <p class="card-title">Entrar com</p>
+
+      <div class="erro" id="erro"></div>
 
       <button class="btn" onclick="loginGoogle()">
         <svg class="btn-icon" viewBox="0 0 24 24">
@@ -135,6 +143,8 @@
         </svg>
         Continuar com Facebook
       </button>
+
+      <div class="loading" id="loading">Entrando... aguarde 😄</div>
     </div>
 
     <p class="terms">
@@ -145,38 +155,58 @@
 
   </div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-  import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCoegwWC-xT7nXHQCwOCf2oM2IzYXODA8o",
-    authDomain: "josabet-db231.firebaseapp.com",
-    projectId: "josabet-db231",
-    storageBucket: "josabet-db231.firebasestorage.app",
-    messagingSenderId: "929085822183",
-    appId: "1:929085822183:web:9c5b7a27cf4b355eb5be42"
-  };
+    const firebaseConfig = {
+      apiKey: "AIzaSyCoegwWC-xT7nXHQCwOCf2oM2IzYXODA8o",
+      authDomain: "josabet-db231.firebaseapp.com",
+      projectId: "josabet-db231",
+      storageBucket: "josabet-db231.firebasestorage.app",
+      messagingSenderId: "929085822183",
+      appId: "1:929085822183:web:9c5b7a27cf4b355eb5be42"
+    };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const googleProvider = new GoogleAuthProvider();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const googleProvider = new GoogleAuthProvider();
+    const facebookProvider = new FacebookAuthProvider();
 
-  window.loginGoogle = async function() {
-    try {
-const result = await signInWithPopup(auth, googleProvider);
-const user = result.user;
-window.location.href = 'home.html';
-    } catch (error) {
-      alert('Erro ao fazer login: ' + error.message);
+    // Se já está logado, vai direto para home
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        window.location.href = 'home.html';
+      }
+    });
+
+    async function fazerLogin(provider) {
+      const loading = document.getElementById('loading');
+      const erro = document.getElementById('erro');
+      loading.style.display = 'block';
+      erro.style.display = 'none';
+
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const token = await result.user.getIdToken();
+        localStorage.setItem('josabet_token', token);
+        localStorage.setItem('josabet_user', JSON.stringify({
+          nome: result.user.displayName,
+          foto: result.user.photoURL,
+          email: result.user.email
+        }));
+        window.location.href = 'home.html';
+      } catch (error) {
+        loading.style.display = 'none';
+        erro.style.display = 'block';
+        erro.textContent = 'Erro ao fazer login. Tente novamente.';
+        console.error(error);
+      }
     }
-  }
 
-  window.loginFacebook = function() {
-    alert('Login com Facebook em breve!');
-  }
-</script>
+    window.loginGoogle = () => fazerLogin(googleProvider);
+    window.loginFacebook = () => fazerLogin(facebookProvider);
+  </script>
 
 </body>
-
 </html>
