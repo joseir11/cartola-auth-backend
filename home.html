@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JosaBet - Home</title>
+  <title>JosaBet - Dados do Cartola</title>
   <style>
-    /* (TODO o estilo que você já tem – igual ao anterior) */
+    /* Mantive TODO o seu CSS original – igual ao que você tinha */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -36,15 +36,7 @@
       border-radius: 50%;
       border: 2px solid white;
     }
-    .btn-sair {
-      background: transparent;
-      border: 1px solid white;
-      color: white;
-      padding: 4px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-    }
+    .btn-sair { display: none; } /* escondido */
     nav {
       background: #fff;
       display: flex;
@@ -406,39 +398,77 @@
     </div>
     <div class="header-user">
       <img id="user-foto" src="https://via.placeholder.com/32" alt="Foto" />
-      <span id="user-nome">Usuário</span>
-      <button class="btn-sair" onclick="sair()">Sair</button>
+      <span id="user-nome">Visitante</span>
     </div>
   </header>
 
   <nav>
-    <a onclick="mostrarPagina('meu-time')" class="active" id="nav-meu-time">MEU TIME</a>
-    <a onclick="mostrarPagina('mercado')" id="nav-mercado">MERCADO</a>
-    <a onclick="mostrarPagina('parciais')" id="nav-parciais">PARCIAIS</a>
-    <a onclick="mostrarPagina('rodada')" id="nav-rodada">RODADA</a>
-    <a onclick="mostrarPagina('liga')" id="nav-liga">COMPETIÇÕES</a>
+    <a onclick="mostrarPagina('meu-time')" class="active" id="nav-meu-time">Meu Time</a>
+    <a onclick="mostrarPagina('mercado')" id="nav-mercado">Mercado</a>
+    <a onclick="mostrarPagina('parciais')" id="nav-parciais">Parciais</a>
+    <a onclick="mostrarPagina('rodada')" id="nav-rodada">Rodada</a>
+    <a onclick="mostrarPagina('liga')" id="nav-liga">Liga</a>
   </nav>
 
   <main>
-    <!-- MEU TIME (sem dados reais) -->
+    <!-- MEU TIME (estático) -->
     <div class="pagina ativa" id="pagina-meu-time">
       <div class="cards-resumo">
         <div class="card-resumo">
-          <div class="valor" id="pontos-rodada">0.0</div>
+          <div class="valor" id="pontos-rodada">-</div>
           <div class="label">Pontos na rodada</div>
         </div>
         <div class="card-resumo">
-          <div class="valor" id="patrimonio">C$ 100</div>
+          <div class="valor" id="patrimonio">-</div>
           <div class="label">Patrimônio</div>
         </div>
         <div class="card-resumo">
-          <div class="valor" id="posicao-liga">#-</div>
+          <div class="valor" id="posicao-liga">-</div>
           <div class="label">Posição na liga</div>
         </div>
       </div>
       <div class="secao">
-        <h2>⚽ Meu Time (simulação)</h2>
-        <p class="loading-msg">Dados do seu time ainda não disponíveis sem autenticação.</p>
+        <h2>⚽ Meu Time (ilustrativo)</h2>
+        <div class="campo-wrapper">
+          <div class="campo">
+            <div class="marcacoes">
+              <div class="borda-interna"></div>
+              <div class="linha-meio"></div>
+              <div class="circulo-centro"></div>
+              <div class="ponto-centro"></div>
+              <div class="area-grande-baixo"></div>
+              <div class="area-grande-cima"></div>
+              <div class="area-pequena-baixo"></div>
+              <div class="area-pequena-cima"></div>
+              <div class="gol-baixo"></div>
+              <div class="gol-cima"></div>
+              <div class="canto tl"></div>
+              <div class="canto tr"></div>
+              <div class="canto bl"></div>
+              <div class="canto br"></div>
+            </div>
+            <div class="linha" id="linha-atacantes">
+              <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" /></div><div class="jogador-nome">Atacante</div><div class="jogador-pts">0</div></div>
+              <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" /></div><div class="jogador-nome">Atacante</div><div class="jogador-pts">0</div></div>
+              <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" /></div><div class="jogador-nome">Atacante</div><div class="jogador-pts">0</div></div>
+            </div>
+            <div class="linha" id="linha-meias">
+              <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" /></div><div class="jogador-nome">Meia</div><div class="jogador-pts">0</div></div>
+              <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" /></div><div class="jogador-nome">Meia</div><div class="jogador-pts">0</div></div>
+              <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" /></div><div class="jogador-nome">Meia</div><div class="jogador-pts">0</div></div>
+            </div>
+            <div class="linha" id="linha-defensores">
+              <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" /></div><div class="jogador-nome">Lateral</div><div class="jogador-pts">0</div></div>
+              <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" /></div><div class="jogador-nome">Zagueiro</div><div class="jogador-pts">0</div></div>
+              <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" /></div><div class="jogador-nome">Zagueiro</div><div class="jogador-pts">0</div></div>
+              <div class="jogador"><div class="jogador-circulo"><img src="jogador.png" /></div><div class="jogador-nome">Lateral</div><div class="jogador-pts">0</div></div>
+            </div>
+            <div class="linha-tec-gol">
+              <div class="jogador tecnico"><div class="jogador-circulo"><img src="tec.png" /></div><div class="jogador-nome">Técnico</div><div class="jogador-pts">0</div></div>
+              <div class="jogador"><div class="jogador-circulo"><img src="gol.png" /></div><div class="jogador-nome">Goleiro</div><div class="jogador-pts">0</div></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -480,67 +510,31 @@
       </div>
     </div>
 
-    <!-- LIGA -->
+    <!-- LIGA (desativada) -->
     <div class="pagina" id="pagina-liga">
       <div class="secao">
-        <h2>🏆 MINHAS COMPETIÇÕES</h2>
-        <div class="aviso">
-          <p>Escolha uma das suas ligas:</p>
-          <button onclick="carregarLiga('d5rp3vak58ms73eri3d0')">Liga Pontos Corridos</button>
-          <button onclick="carregarLiga('taca-nattos')">Liga Taça Nattos</button>
-        </div>
-        <div id="lista-liga"><div class="loading-msg">Selecione uma liga acima.</div></div>
+        <h2>🏆 Liga</h2>
+        <div class="aviso">Funcionalidade desativada. Acompanhe as ligas diretamente no site do Cartola.</div>
       </div>
     </div>
   </main>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
-
+  <script>
+    // ========== CONFIGURAÇÃO ==========
+    // Usando o proxy que já funcionava antes
     const PROXY = 'https://josabet-proxy.onrender.com';
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCoegwWC-xT7nXHQCwOCf2oM2IzYXODA8o",
-      authDomain: "josabet-db231.firebaseapp.com",
-      projectId: "josabet-db231",
-      storageBucket: "josabet-db231.firebasestorage.app",
-      messagingSenderId: "929085822183",
-      appId: "1:929085822183:web:9c5b7a27cf4b355eb5be42"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    let tokenAtual = '';
+    // Variáveis globais
     let mercadoCompleto = [];
     let posicaoFiltro = 'todos';
 
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        document.getElementById('user-nome').textContent = user.displayName;
-        document.getElementById('user-foto').src = user.photoURL || 'https://via.placeholder.com/32';
-        tokenAtual = await user.getIdToken();
-        carregarDadosIniciais();
-      } else {
-        window.location.href = 'index.html';
-      }
-    });
-
-    async function carregarDadosIniciais() {
-      carregarMercado();
-      carregarPartidas();
-      carregarParciais();
-    }
-
-    // ========== MERCADO ==========
+    // ========== FUNÇÕES DE CARREGAMENTO ==========
     async function carregarMercado() {
       try {
-        const res = await fetch(`${PROXY}/mercado`, {
-          headers: { 'Authorization': `Bearer ${tokenAtual}` }
-        });
+        const res = await fetch(`${PROXY}/mercado`);
         const data = await res.json();
         if (data && data.atletas) {
+          // Enriquece com informações de clubes e posições
           mercadoCompleto = data.atletas.map(a => ({
             ...a,
             clube: data.clubes[a.clube_id]?.abreviacao || '',
@@ -549,7 +543,8 @@
           renderizarMercado(mercadoCompleto);
         }
       } catch (e) {
-        document.getElementById('lista-mercado').innerHTML = '<div class="loading-msg">Erro ao carregar mercado.</div>';
+        document.getElementById('lista-mercado').innerHTML = '<div class="loading-msg">Erro ao carregar mercado. Proxy pode estar fora do ar.</div>';
+        console.error(e);
       }
     }
 
@@ -567,21 +562,19 @@
             <div class="nome">${a.apelido || a.nome || 'Jogador'}</div>
             <div class="clube">${a.clube || '-'} · <span class="posicao-badge ${posClasse[a.posicao] || 'pos-gol'}">${a.posicao?.toUpperCase() || '?'}</span></div>
           </div>
-          <div class="jogador-preco">C$ ${(a.preco_num || 0).toFixed(1)}</div>
+          <div class="jogador-preco">C$ ${(a.preco_num || 0).toFixed(2)}</div>
         </div>
       `).join('');
     }
 
-    // ========== PARTIDAS ==========
     async function carregarPartidas() {
       try {
-        const res = await fetch(`${PROXY}/partidas`, {
-          headers: { 'Authorization': `Bearer ${tokenAtual}` }
-        });
+        const res = await fetch(`${PROXY}/partidas`);
         const data = await res.json();
         renderizarPartidas(data);
       } catch (e) {
         document.getElementById('lista-partidas').innerHTML = '<div class="loading-msg">Erro ao carregar partidas.</div>';
+        console.error(e);
       }
     }
 
@@ -593,7 +586,7 @@
       }
       document.getElementById('numero-rodada').textContent = `Rodada ${data.rodada || '-'}`;
       const statusEl = document.getElementById('status-rodada');
-      statusEl.textContent = data.rodada === 6 ? '🔴 Ao vivo' : 'Em breve';
+      statusEl.textContent = data.rodada === 6 ? '🔴 Ao vivo' : 'Em breve'; // simplificado
       lista.innerHTML = data.partidas.map(p => `
         <div class="partida">
           <div class="time-partida">${p.clube_casa_nome || 'Time Casa'}</div>
@@ -603,16 +596,14 @@
       `).join('');
     }
 
-    // ========== PARCIAIS ==========
     async function carregarParciais() {
       try {
-        const res = await fetch(`${PROXY}/atletas/pontuados`, {
-          headers: { 'Authorization': `Bearer ${tokenAtual}` }
-        });
+        const res = await fetch(`${PROXY}/atletas/pontuados`);
         const data = await res.json();
         renderizarParciais(data);
       } catch (e) {
         document.getElementById('lista-parciais').innerHTML = '<div class="loading-msg">Erro ao carregar parciais.</div>';
+        console.error(e);
       }
     }
 
@@ -633,43 +624,6 @@
         </div>
       `).join('');
     }
-
-    // ========== LIGAS ==========
-    window.carregarLiga = async (codigo) => {
-      const container = document.getElementById('lista-liga');
-      container.innerHTML = '<div class="loading-msg">Carregando liga...</div>';
-      try {
-        const res = await fetch(`${PROXY}/liga/${codigo}`, {
-          headers: { 'Authorization': `Bearer ${tokenAtual}` }
-        });
-        const data = await res.json();
-        if (data.erro) {
-          container.innerHTML = `<div class="aviso">${data.erro}. Exibindo dados de exemplo.</div>`;
-          const exemplo = codigo === 'd5rp3vak58ms73eri3d0' 
-            ? ['Time A', 'Time B', 'Time C'] 
-            : ['Nattos FC', 'Amigos FC', 'Joseiros'];
-          container.innerHTML += exemplo.map((time, idx) => `
-            <div class="item-lista">
-              <span>${time}</span>
-              <span class="pontos-valor">${Math.floor(Math.random() * 100)} pts</span>
-            </div>
-          `).join('');
-        } else {
-          if (data.times) {
-            container.innerHTML = data.times.map(t => `
-              <div class="item-lista">
-                <span>${t.nome}</span>
-                <span class="pontos-valor">${t.pontos} pts</span>
-              </div>
-            `).join('');
-          } else {
-            container.innerHTML = '<div class="aviso">Formato de dados não reconhecido.</div>';
-          }
-        }
-      } catch (e) {
-        container.innerHTML = '<div class="aviso">Erro ao carregar liga.</div>';
-      }
-    };
 
     // ========== FILTROS ==========
     window.filtrarPosicao = function(pos, btn) {
@@ -694,6 +648,7 @@
       renderizarMercado(filtrado);
     };
 
+    // ========== NAVEGAÇÃO ==========
     window.mostrarPagina = function(pagina) {
       document.querySelectorAll('.pagina').forEach(p => p.classList.remove('ativa'));
       document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
@@ -701,10 +656,12 @@
       document.getElementById(`nav-${pagina}`).classList.add('active');
     };
 
-    window.sair = async function() {
-      await signOut(auth);
-      window.location.href = 'index.html';
-    };
+    // ========== INICIALIZAÇÃO ==========
+    document.addEventListener('DOMContentLoaded', () => {
+      carregarMercado();
+      carregarPartidas();
+      carregarParciais();
+    });
   </script>
 </body>
 </html>
