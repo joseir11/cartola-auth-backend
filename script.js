@@ -26,7 +26,7 @@ function criarTopBar() {
     return topBar;
 }
 
-// Função para criar o card principal (com todas as novas informações)
+// Função para criar o card principal
 function criarCardPrincipal() {
     const card = document.createElement('div');
     card.className = 'card';
@@ -80,7 +80,6 @@ async function copiarChavePix() {
         await navigator.clipboard.writeText(chavePix);
         alert("CHAVE PIX COPIADA! ✅\n" + chavePix);
     } catch (err) {
-        // Fallback para navegadores mais antigos
         const textarea = document.createElement('textarea');
         textarea.value = chavePix;
         document.body.appendChild(textarea);
@@ -91,28 +90,74 @@ async function copiarChavePix() {
     }
 }
 
-// Função para abrir calendário nativo
-function abrirCalendario() {
-    const input = document.createElement('input');
-    input.type = 'date';
-    
-    // Converte data atual para formato YYYY-MM-DD
+// Função para converter data de DD/MM/YYYY para YYYY-MM-DD
+function converterDataParaInput(dataStr) {
+    const partes = dataStr.split('/');
+    if (partes.length === 3) {
+        return `${partes[2]}-${partes[1].padStart(2, '0')}-${partes[0].padStart(2, '0')}`;
+    }
     const hoje = new Date();
     const ano = hoje.getFullYear();
     const mes = String(hoje.getMonth() + 1).padStart(2, '0');
     const dia = String(hoje.getDate()).padStart(2, '0');
-    input.value = `${ano}-${mes}-${dia}`;
+    return `${ano}-${mes}-${dia}`;
+}
+
+// Função para converter data de YYYY-MM-DD para DD/MM/YYYY
+function converterDataParaExibir(dataStr) {
+    const partes = dataStr.split('-');
+    if (partes.length === 3) {
+        return `${partes[2]}/${partes[1]}/${partes[0]}`;
+    }
+    return dataStr;
+}
+
+// Função para abrir calendário nativo (CORRIGIDA)
+function abrirCalendario() {
+    // Cria um input date dinâmico
+    const inputDate = document.createElement('input');
+    inputDate.type = 'date';
+    inputDate.style.position = 'absolute';
+    inputDate.style.left = '-9999px';
+    inputDate.style.top = '-9999px';
     
-    input.addEventListener('change', (e) => {
-        const dataEscolhida = new Date(e.target.value);
-        dataSelecionada = dataEscolhida.toLocaleDateString('pt-BR');
-        const badgeData = document.getElementById('badgeData');
-        if (badgeData) {
-            badgeData.textContent = dataSelecionada;
+    // Converte a data atual para o formato do input
+    const dataAtualInput = converterDataParaInput(dataSelecionada);
+    inputDate.value = dataAtualInput;
+    
+    // Adiciona ao body
+    document.body.appendChild(inputDate);
+    
+    // Evento quando a data for alterada
+    inputDate.addEventListener('change', (e) => {
+        const novaData = e.target.value;
+        if (novaData) {
+            dataSelecionada = converterDataParaExibir(novaData);
+            const badgeData = document.getElementById('badgeData');
+            if (badgeData) {
+                badgeData.textContent = dataSelecionada;
+            }
         }
+        // Remove o input do DOM
+        document.body.removeChild(inputDate);
     });
     
-    input.click();
+    // Força a abertura do calendário
+    inputDate.showPicker();
+    
+    // Fallback para navegadores que não suportam showPicker()
+    if (!inputDate.showPicker) {
+        inputDate.click();
+    }
+    
+    // Remove o input se o usuário cancelar (evento blur)
+    inputDate.addEventListener('blur', () => {
+        setTimeout(() => {
+            if (document.body.contains(inputDate)) {
+                document.body.removeChild(inputDate);
+            }
+        }, 100);
+    });
 }
 
 // Função para editar horário
@@ -141,7 +186,7 @@ function editarLocal() {
     }
 }
 
-// Função para editar a quantidade manualmente (clicando no badge)
+// Função para editar a quantidade manualmente
 function editarQuantidadeManual() {
     const novaQtde = prompt(`Digite a quantidade de jogadores (mínimo 1, máximo 99):`, quantidadeAtual);
     
@@ -167,7 +212,7 @@ function editarQuantidadeManual() {
     }
 }
 
-// Função para recriar todos os badges (vertical + editáveis)
+// Função para recriar todos os badges
 function atualizarBadgesJogadores() {
     const containerBadges = document.getElementById('containerBadges');
     if (!containerBadges) return;
@@ -228,7 +273,7 @@ function atualizarQuantidade(novaQtde) {
     atualizarBadgesJogadores();
 }
 
-// Função para configurar eventos (com verificação de elementos)
+// Função para configurar eventos
 function configurarEventos() {
     const btnMenos = document.getElementById('btnMenos');
     const btnMais = document.getElementById('btnMais');
@@ -273,7 +318,6 @@ function configurarEventos() {
 
 // Função para corrigir fallback das imagens
 function corrigirFallbackImagens() {
-    // Para o mascote
     const mascoteImg = document.querySelector('.mascote-img');
     if (mascoteImg && mascoteImg.complete && mascoteImg.naturalWidth === 0) {
         mascoteImg.style.display = 'none';
@@ -281,7 +325,6 @@ function corrigirFallbackImagens() {
         if (fallback) fallback.style.display = 'flex';
     }
     
-    // Para o PIX
     const pixImg = document.querySelector('.pix-img');
     if (pixImg && pixImg.complete && pixImg.naturalWidth === 0) {
         const pixCircle = document.getElementById('pixCircle');
@@ -305,8 +348,6 @@ function renderizarApp() {
         app.appendChild(criarContainerBadges());
         configurarEventos();
         atualizarBadgesJogadores();
-        
-        // Pequeno delay para verificar as imagens
         setTimeout(corrigirFallbackImagens, 100);
     } catch (error) {
         console.error('Erro ao renderizar:', error);
@@ -314,5 +355,5 @@ function renderizarApp() {
     }
 }
 
-// Inicializa o app quando a página carregar
+// Inicializa o app
 document.addEventListener('DOMContentLoaded', renderizarApp);
